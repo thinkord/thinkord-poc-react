@@ -3,6 +3,14 @@ import { v4 as uuid } from 'uuid'
 const StoreContext = React.createContext(null)
 
 
+/*
+ * [Please notice]
+ * update data without mutating state: "using spread operator"
+ * if you don't follow this rule, TimLo will kill it!
+ * if you don't know spread operator: check this out
+ * https://codeburst.io/javascript-the-spread-operator-a867a71668ca
+ */
+
 class StoreProvider extends Component {
     state = {
         data: {
@@ -23,6 +31,12 @@ class StoreProvider extends Component {
         }
     }
 
+    /**
+     * 
+     * @param {string} title 
+     * @param {string} content 
+     * @param {number} collectionId 
+     */
     addBlock = (title, content, collectionId) => {
         const { data } = this.state
         const newBlockId = uuid()
@@ -45,6 +59,10 @@ class StoreProvider extends Component {
         })
     }
 
+    /**
+     * 
+     * @param {string} title 
+     */
     addCollection = (title) => {
         const { data } = this.state
         const newCollectionId = uuid()
@@ -67,6 +85,11 @@ class StoreProvider extends Component {
         })
     }
 
+    /**
+     * 
+     * @param {number} collectionId 
+     * @param {number} index 
+     */
     deleteBlock = (collectionId, index) => {
         const { data } = this.state
         const collection = data.collections[collectionId]
@@ -83,6 +106,11 @@ class StoreProvider extends Component {
         })
     }
 
+    /**
+     * 
+     * @param {string} title
+     * @param {number} collectionId 
+     */
     updateCollectionTitle = (title, collectionId) => {
         const { data } = this.state
         const collection = data.collections[collectionId]
@@ -100,6 +128,12 @@ class StoreProvider extends Component {
         })
     }
 
+    /**
+     * 
+     * @param {string} title 
+     * @param {number} collectionId 
+     * @param {number} index 
+     */
     updateBlockTitle = (title, collectionId, index) => {
         const { data } = this.state
         const collection = data.collections[collectionId]

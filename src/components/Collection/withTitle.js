@@ -1,8 +1,14 @@
 import React, { useState, useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { InputBase, Typography } from "@material-ui/core";
-// import storeAPI from '../../data/storeAPI'
 import { StoreContext } from '../../context'
+
+
+
+/**
+ * If you don't know hoc, check this out:
+ * https://zh-hant.reactjs.org/docs/higher-order-components.html 
+ */
 
 const useStyles = makeStyles((theme) => ({
     editableTitle: {
