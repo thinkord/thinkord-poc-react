@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
+import React, { useContext,useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import { StoreContext } from '../context'
 import Collection from '../components/Collection/Collection'
-import "./App.css"
+
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -12,20 +12,18 @@ const useStyle = makeStyles((theme) => ({
         background: 'grey'
     }
 }))
-const Work = () => {
+const Work = ({match}) => {
     const classes = useStyle()
+    const [collectionId] = useState(match.params.id)
     const context = useContext(StoreContext)
-    const { data } = context
+    const { getCollection } = context
 
+    const collection = getCollection(collectionId)
+    console.log(collection)
     return (
         <div className={classes.root}>
-        
             <Link className="App-link" to="/">Link to Home</Link>
-
-            {data.collectionIds.map((collectionId) => {
-                const collection = data.collections[collectionId]
-                return <Collection collection={collection} key={collectionId} />
-            })}
+            <Collection collection={collection} key={collectionId} />
         </div>
     )
 }

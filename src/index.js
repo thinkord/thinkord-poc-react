@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { HashRouter as Router, Route } from 'react-router-dom'
 
+
 import { StoreProvider } from "./context"
-import App from "./pages/Home"
+import Home from "./pages/Home"
 import Work from "./pages/Work"
 
 ReactDOM.render(
@@ -12,8 +12,8 @@ ReactDOM.render(
     <Router>
       <div>
         <main>
-          <Route exact path="/" component={App} />
-          <Route path="/work" component={Work} />
+          <Route exact path="/" component={Home} />
+          <Route path="/work/:id" component={Work} />
         </main>
       </div>
     </Router>

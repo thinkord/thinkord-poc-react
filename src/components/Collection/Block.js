@@ -18,7 +18,7 @@ export default function Block({ block, index, collectionId}) {
     const {deleteBlock} = useContext(StoreContext)
     const handleBlockChange = () =>{
         deleteBlock(collectionId,index)
-    }
+    } 
 
     return (
         <div className={classes.block}>

@@ -1,0 +1,30 @@
+{
+    "collections": {
+        "collection-1": {
+            "id": "collection-1",
+            "title": "Todo",
+            "blocks": [
+                {
+                    "id": "block-1",
+                    "title": "Learning how to cook",
+                    "content": "I want to know the recipe"
+                }
+            ]
+        },
+        "collection-2": {
+            "id": "collection-2",
+            "title": "Hello world",
+            "blocks": [
+                {
+                    "id": "block-1",
+                    "title": "Learning how to code",
+                    "content": "I want to know the oop"
+                }
+            ]
+        }
+    },
+    "collectionIds": [
+        "collection-1",
+        "collection-2"
+    ]
+}

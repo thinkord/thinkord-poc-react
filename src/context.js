@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { v4 as uuid } from 'uuid'
+import appRuntime from './appRuntime'
 const StoreContext = React.createContext(null)
 
 
@@ -15,20 +16,40 @@ class StoreProvider extends Component {
     state = {
         data: {
             collections: {
-                'collection-1': {
-                    id: 'collection-1',
-                    title: 'Todo',
+                'new-1': {
+                    id: 'new-1',
+                    title: 'create your note',
                     blocks: [
                         {
                             id: 'block-1',
-                            title: 'Learning how to cook',
-                            content: 'I want to know the recipe'
+                            title: 'create block',
+                            content: 'please enter some content'
                         }
                     ]
                 }
             },
-            collectionIds: ['collection-1']
+            collectionIds: []
         }
+    }
+
+    // Load the user's content
+    componentDidMount(){
+        appRuntime.send('loadFile')
+        appRuntime.subscribe('loadComplete',(data)=>{
+            data = JSON.parse(data)
+            this.setState({
+                data
+            })
+        })
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     */
+    getCollection = (id) => {
+        const {data} = this.state
+        return data.collections[id];
     }
 
     /**
@@ -151,7 +172,7 @@ class StoreProvider extends Component {
             }
         }
         this.setState({
-            data: newState 
+            data: newState
         })
     }
     render() {
@@ -162,8 +183,10 @@ class StoreProvider extends Component {
                 deleteBlock: this.deleteBlock,
                 updateCollectionTitle: this.updateCollectionTitle,
                 updateBlockTitle: this.updateBlockTitle,
-                addCollection: this.addCollection
-            }}>
+                addCollection: this.addCollection,
+                getCollection: this.getCollection
+            }}> 
+
                 {this.props.children}
             </StoreContext.Provider>
         )

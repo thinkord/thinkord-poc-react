@@ -2,9 +2,8 @@ import React, { useState, useContext } from 'react'
 import { Paper, InputBase, Button, IconButton } from '@material-ui/core'
 import ClearIcon from '@material-ui/icons/Clear'
 import { fade, makeStyles } from "@material-ui/core";
-
-// import storeAPI from '../../data/storeAPI';
 import { StoreContext } from '../../context'
+import appRuntime from '../../appRuntime'
 
 const useStyle = makeStyles((theme) => ({
     block: {
@@ -46,7 +45,8 @@ export default function InputBlock({ setOpen, collectionId, type }) {
         } else {
             addCollection(title)
             setTitle('')
-            setOpen(false)
+            setOpen(false) 
+            appRuntime.send('createFile',title)
         }
 
     }

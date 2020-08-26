@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom'
 import { StoreContext } from '../context'
 import InputContainer from '../components/Input/InputContainer'
+import appRuntime from '../appRuntime'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
-  footer: { 
+  footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
@@ -53,15 +54,18 @@ function App() {
   const classes = useStyles();
   const context = useContext(StoreContext)
   const { data } = context
-  
- 
+
+  useEffect(() => {
+    
+  })
+
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Thinkord
+            <div onClick={()=>{appRuntime.send('main','hello')}}>Thinkord</div>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -96,10 +100,10 @@ function App() {
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      View
+                      <Link to={`/work/${collectionId}`} onClick={() => { appRuntime.send('controlbar','hello') }}>Keep recording</Link>
                     </Button>
                     <Button size="small" color="primary">
-                      <Link to="/work" className="App-link">Link to about page</Link>
+                      <Link to={`/work/${collectionId}`} className="App-link" onClick={() => { appRuntime.send('audio','hello') }}>Edit</Link>
                     </Button>
                   </CardActions>
                 </Card>
