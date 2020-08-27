@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import { StoreContext } from '../context'
 import Collection from '../components/Collection/Collection'
+import {Button } from '@material-ui/core'
 
 
 const useStyle = makeStyles((theme) => ({
@@ -16,14 +17,15 @@ const Work = ({match}) => {
     const classes = useStyle()
     const [collectionId] = useState(match.params.id)
     const context = useContext(StoreContext)
-    const { getCollection } = context
+    const { getCollection,saveCollection } = context
 
     const collection = getCollection(collectionId)
-    console.log(collection)
+    
     return (
         <div className={classes.root}>
             <Link className="App-link" to="/">Link to Home</Link>
             <Collection collection={collection} key={collectionId} />
+            <Button onClick={()=>saveCollection()}>Save File</Button>
         </div>
     )
 }

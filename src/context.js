@@ -43,6 +43,11 @@ class StoreProvider extends Component {
         })
     }
 
+
+    saveCollection = ()=>{
+        appRuntime.send('saveFile',JSON.stringify(this.state.data))
+    }
+
     /**
      * 
      * @param {string} id 
@@ -181,10 +186,11 @@ class StoreProvider extends Component {
                 ...this.state,
                 addBlock: this.addBlock,
                 deleteBlock: this.deleteBlock,
-                updateCollectionTitle: this.updateCollectionTitle,
                 updateBlockTitle: this.updateBlockTitle,
+                updateCollectionTitle: this.updateCollectionTitle,
                 addCollection: this.addCollection,
-                getCollection: this.getCollection
+                getCollection: this.getCollection,
+                saveCollection: this.saveCollection
             }}> 
 
                 {this.props.children}

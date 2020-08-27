@@ -11,6 +11,8 @@ exports.createFile = (event, filename) => {
     })
 }
 
+// Get from the database
+// process it to the specific format
 exports.loadFile = () => {
     return new Promise((resolve, reject) => {
         // find this user's collections
@@ -23,5 +25,14 @@ exports.loadFile = () => {
     })
 }
 
-// process it to the specific format
-// send to the renderer process
+exports.saveFile = (content) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(`./data/dev-data.json`, content, function (err) {
+            if (err) {
+                reject(err)
+            }
+            resolve(`Write successfully`)
+        })
+    })
+}
+
