@@ -33,9 +33,9 @@ class StoreProvider extends Component {
     }
 
     // Load the user's content
-    componentDidMount(){
+    componentDidMount() {
         appRuntime.send('loadFile')
-        appRuntime.subscribe('loadComplete',(data)=>{
+        appRuntime.subscribe('loadComplete', (data) => {
             data = JSON.parse(data)
             this.setState({
                 data
@@ -48,7 +48,7 @@ class StoreProvider extends Component {
      * @param {string} id 
      */
     getCollection = (id) => {
-        const {data} = this.state
+        const { data } = this.state
         return data.collections[id];
     }
 
@@ -149,6 +149,29 @@ class StoreProvider extends Component {
         })
     }
 
+
+    deleteCollection = (collectionId) => {
+
+        const { data } = this.state
+        let collections = { ...data.collections }
+        let collectionIds = [...data.collectionIds]
+        
+        Object.keys(collections).map((cId) => {
+            if (cId === collectionId) {
+                delete collections[collectionId]
+            }
+        })
+        collectionIds.map((cId, index) => {
+            if (cId === collectionId) {
+                collectionIds.splice(index, 1)
+            }
+        })
+        const newState = { ...data, collections, collectionIds }
+        this.setState({
+            data: newState
+        })
+    }
+
     /**
      * 
      * @param {string} title 
@@ -184,8 +207,9 @@ class StoreProvider extends Component {
                 updateCollectionTitle: this.updateCollectionTitle,
                 updateBlockTitle: this.updateBlockTitle,
                 addCollection: this.addCollection,
-                getCollection: this.getCollection
-            }}> 
+                getCollection: this.getCollection,
+                deleteCollection: this.deleteCollection
+            }}>
 
                 {this.props.children}
             </StoreContext.Provider>

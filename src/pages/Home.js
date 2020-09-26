@@ -1,14 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import WindowTitlebar from '../components/WindowTitlebar/WindowTitlebar';
 import NoteCards from '../components/NoteCards/NoteCards';
 import SearchButton from '../components/SearchButton/SearchButton';
 import './Home.scss';
 import Container from 'react-bootstrap/Container';
-// import Container from '@material-ui/core/Container';
-import { Link } from 'react-router-dom'
 import { StoreContext } from '../context'
-import InputContainer from '../components/Input/InputContainer'
-import appRuntime from '../appRuntime'
+// import InputContainer from '../components/Input/InputContainer'
 
 function App() {
   const context = useContext(StoreContext)

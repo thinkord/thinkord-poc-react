@@ -5,12 +5,12 @@ import { StoreContext } from '../../../context';
 import Modal from 'react-bootstrap/Modal';
 import './noteCard.scss';
 
-function NoteCard (props) {
+function NoteCard(props) {
     const [newTitle, setNewTitle] = useState(props.title);
     const [menuShow, setMenuShow] = useState(false);
     const [modalShow, setModalShow] = useState(false);
     const [modalFunc, setModalFunc] = useState("rename");
-    const context = useContext(StoreContext);
+    const { updateCollectionTitle, deleteCollection } = useContext(StoreContext);
 
     const handleMenuToggle = () => {
         setMenuShow(prevState => !prevState);
@@ -30,18 +30,18 @@ function NoteCard (props) {
 
     const handleBookmarkChanged = (noteId) => {
     }
-    
+
     const handleNoteRename = (newTitle, noteId) => {
-        context['updateCollectionTitle'](newTitle, noteId);
+        updateCollectionTitle(newTitle, noteId);
         handleModalToggle();
     }
-    
+
     const handleNoteDelete = (noteId) => {
-    
+        deleteCollection(noteId)
     }
 
     var modalDialog;
-    switch(modalFunc){
+    switch (modalFunc) {
         case "rename":
             modalDialog = (
                 <Modal show={modalShow} onHide={handleModalToggle} centered>
@@ -49,7 +49,7 @@ function NoteCard (props) {
                         <Modal.Title>Rename</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <input onChange={handleTitleChange} type="text" defaultValue={props.title}/>
+                        <input onChange={handleTitleChange} type="text" defaultValue={props.title} />
                     </Modal.Body>
                     <Modal.Footer className="modal_footer">
                         <i className="modal_icon fas fa-check-circle" onClick={() => {
@@ -103,7 +103,7 @@ function NoteCard (props) {
                         <span>statistics</span>
                     </div> */}
                 </div>
-                <Link className="card-record-anchor" to={`/work/${props.id}`} onClick={() => { appRuntime.send('controlbar','hello') }}>
+                <Link className="card-record-anchor" to={`/work/${props.id}`} onClick={() => { appRuntime.send('controlbar', 'hello') }}>
                     <i className="far fa-dot-circle"></i>
                     Start Recording
                 </Link>
