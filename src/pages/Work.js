@@ -13,6 +13,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 const Work = ({match}) => {
+    console.log(match)
     const classes = useStyle()
     const [collectionId] = useState(match.params.id)
     const context = useContext(StoreContext)

@@ -3,6 +3,7 @@
         "collection-1": {
             "id": "collection-1",
             "title": "Todo",
+            "bookmarked": false,
             "blocks": [
                 {
                     "id": "block-1",
@@ -14,6 +15,31 @@
         "collection-2": {
             "id": "collection-2",
             "title": "Hello world",
+            "bookmarked": false,
+            "blocks": [
+                {
+                    "id": "block-1",
+                    "title": "Learning how to code",
+                    "content": "I want to know the oop"
+                }
+            ]
+        },
+        "collection-3": {
+            "id": "collection-3",
+            "title": "Hello world222222222222",
+            "bookmarked": true,
+            "blocks": [
+                {
+                    "id": "block-1",
+                    "title": "Learning how to code",
+                    "content": "I want to know the oop"
+                }
+            ]
+        },
+        "collection-4": {
+            "id": "collection-4",
+            "title": "Hello world4",
+            "bookmarked": true,
             "blocks": [
                 {
                     "id": "block-1",
@@ -25,6 +51,8 @@
     },
     "collectionIds": [
         "collection-1",
-        "collection-2"
+        "collection-2",
+        "collection-3",
+        "collection-4"
     ]
 }
