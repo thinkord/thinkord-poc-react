@@ -14,7 +14,7 @@ exports.createFile = (event, filename) => {
 exports.loadFile = () => {
     return new Promise((resolve, reject) => {
         // find this user's collections
-        fs.readFile(`./data/dev-data.json`, function (err, data) {
+        fs.readFile(`./data/real-dev-data.json`, function (err, data) {
             if (err) {
                 reject(err)
             }

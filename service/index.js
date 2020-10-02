@@ -4,7 +4,7 @@ const { snipaste } = require('./snipaste')
 const { recordText } = require('./text')
 const { recordVideo } = require('./video')
 const { createFile,loadFile } = require('./file')
-
+ 
 
 ipcMain.on('audio', recordAudio)
 ipcMain.on('text', recordText)

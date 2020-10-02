@@ -49,10 +49,32 @@
             ]
         }
     },
+    "folders": {
+        "folder-1": {
+            "id": "folder-1",
+            "name": "f-1",
+            "collections": [
+                "collection-1",
+                "collection-2"
+            ]
+        },
+        "folder-2": {
+            "id": "folder-2",
+            "name": "f-2",
+            "collections": [
+                "collection-3",
+                "collection-4"
+            ]
+        }
+    },
     "collectionIds": [
         "collection-1",
         "collection-2",
         "collection-3",
         "collection-4"
+    ],
+    "folderIds": [
+        "folder-1",
+        "folder-2"
     ]
 }
