@@ -13,29 +13,40 @@ const StoreContext = React.createContext(null)
  */
 
 class StoreProvider extends Component {
-    state = {
-        data: {
-            collections: {
-                'new-1': {
-                    id: 'new-1',
-                    title: 'create your note',
-                    blocks: [
-                        {
-                            id: 'block-1',
-                            title: 'create block',
-                            content: 'please enter some content'
-                        }
-                    ]
-                }
-            },
-            collectionIds: []
-        }
-    }
+    // state = {
+    //     data: {
+    //         collections: {
+    //             'new-1': {
+    //                 id: 'new-1',
+    //                 title: 'create your note',
+    //                 blocks: [
+    //                     {
+    //                         id: 'block-1',
+    //                         title: 'create block',
+    //                         content: 'please enter some content'
+    //                     }
+    //                 ]
+    //             }
+    //         },
+    //         folders: {
+    //             'folder-1': {
+    //                 id: "folder-1",
+    //                 name: "f-1",
+    //                 collections: [
+    //                     "collection-1",
+    //                     "collection-2"
+    //                 ]
+    //             }
+    //         },
+    //         collectionIds: ['new-1'],
+    //         folderIds: ['folder-1']
+    //     }
+    // }
 
     // Load the user's content
-    componentDidMount(){
-        appRuntime.send('loadFile')
-        appRuntime.subscribe('loadComplete',(data)=>{
+    componentDidMount() {
+        appRuntime.send('fileprocess', 'load', '')
+        appRuntime.subscribe('loadComplete', (data) => {
             data = JSON.parse(data)
             this.setState({
                 data
@@ -46,6 +57,9 @@ class StoreProvider extends Component {
 
     saveCollection = ()=>{
         appRuntime.send('saveFile',JSON.stringify(this.state.data))
+    getFolder = (id) => {
+        const { data } = this.state
+        return data.folders[id]
     }
 
     /**
@@ -53,8 +67,17 @@ class StoreProvider extends Component {
      * @param {string} id 
      */
     getCollection = (id) => {
-        const {data} = this.state
+        const { data } = this.state
         return data.collections[id];
+    }
+
+    getCollections = (collectionIds) => {
+        const { data } = this.state
+        const collections = []
+        collectionIds.forEach(collectionsId => {
+            collections.push(data.collections[collectionsId])
+        });
+        return collections
     }
 
     /**
@@ -154,6 +177,31 @@ class StoreProvider extends Component {
         })
     }
 
+
+    deleteCollection = (collectionId) => {
+
+        const { data } = this.state
+        let collections = { ...data.collections }
+        let collectionIds = [...data.collectionIds]
+
+        Object.keys(collections).map((cId) => {
+            if (cId === collectionId) {
+                delete collections[collectionId]
+            }
+            return collections
+        })
+        collectionIds.map((cId, index) => {
+            if (cId === collectionId) {
+                collectionIds.splice(index, 1)
+            }
+            return collectionIds
+        })
+        const newState = { ...data, collections, collectionIds }
+        this.setState({
+            data: newState
+        })
+    }
+
     /**
      * 
      * @param {string} title 
@@ -180,28 +228,40 @@ class StoreProvider extends Component {
             data: newState
         })
     }
+
+
+    addFolder() {
+
+    }
+
+    deleteFolder() {
+
+    }
+
     render() {
         return (
-            <StoreContext.Provider value={{
-                ...this.state,
-                addBlock: this.addBlock,
-                deleteBlock: this.deleteBlock,
-                updateBlockTitle: this.updateBlockTitle,
-                updateCollectionTitle: this.updateCollectionTitle,
-                addCollection: this.addCollection,
-                getCollection: this.getCollection,
-                saveCollection: this.saveCollection
-            }}> 
+            <>
+                {this.state ? <StoreContext.Provider value={{
+                    ...this.state,
+                    addBlock: this.addBlock,
+                    deleteBlock: this.deleteBlock,
+                    updateCollectionTitle: this.updateCollectionTitle,
+                    updateBlockTitle: this.updateBlockTitle,
+                    addCollection: this.addCollection,
+                    getCollection: this.getCollection,
+                    getCollections: this.getCollections,
+                    deleteCollection: this.deleteCollection,
+                    getFolder: this.getFolder
+                }}>
 
-                {this.props.children}
-            </StoreContext.Provider>
+                    {this.props.children}
+                </StoreContext.Provider> : "Loading"}
+
+            </>
         )
     }
 }
 
 const StoreConsumer = StoreContext.Consumer
-
-
-
 
 export { StoreProvider, StoreConsumer, StoreContext }

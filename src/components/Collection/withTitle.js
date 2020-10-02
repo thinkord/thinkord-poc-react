@@ -43,7 +43,7 @@ export default function withTitle(WrappedComponent, update) {
             context[update](newTitle, collectionId, index)
             setOpen(false)
         }
-        
+
         return (
             <div>
                 {open ?

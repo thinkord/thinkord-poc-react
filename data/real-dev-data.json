@@ -45,33 +45,25 @@
                     "id": "block-1",
                     "title": "Learning how to code",
                     "content": "I want to know the oop"
-                },
-                {
-                    "id": "f8b25036-8a5e-4986-b1d1-13b1b3fb84d4",
-                    "title": "cdsacds",
-                    "content": "cdasc"
-                },
-                {
-                    "id": "67328c26-d2af-475f-8b4a-f8a6387799bb",
-                    "title": "cdsa",
-                    "content": "csadcadscdsac"
                 }
             ]
+        }
+    },
+    "folders": {
+        "folder-1": {
+            "id": "folder-1",
+            "name": "f-1",
+            "collections": [
+                "collection-1",
+                "collection-2"
+            ]
         },
-        "9c4fffd3-57d2-4057-9c84-a469fb36956e": {
-            "id": "9c4fffd3-57d2-4057-9c84-a469fb36956e",
-            "title": "Check it out",
-            "blocks": [
-                {
-                    "id": "cbd13364-7b0f-456d-be81-d29d8f545800",
-                    "title": "cdsacsdc",
-                    "content": "cd"
-                },
-                {
-                    "id": "baf22bf4-a092-498b-a993-a7fd2a38fd07",
-                    "title": "cdascsdacdas",
-                    "content": "cds"
-                }
+        "folder-2": {
+            "id": "folder-2",
+            "name": "f-2",
+            "collections": [
+                "collection-3",
+                "collection-4"
             ]
         }
     },
@@ -80,5 +72,9 @@
         "collection-2",
         "collection-3",
         "collection-4"
+    ],
+    "folderIds": [
+        "folder-1",
+        "folder-2"
     ]
 }
