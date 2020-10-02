@@ -11,7 +11,7 @@ const noteCards = ({data}) => (
                         key={collectionId}
                         id={collectionId}
                         title={data.collections[collectionId].title}
-                        bookmark={data.collections[collectionId].bookmarked}
+                        // bookmark={data.collections[collectionId].bookmarked}
                     ></NoteCard>
                 )
             })}

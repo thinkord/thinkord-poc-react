@@ -101,11 +101,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var electron_is_dev__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(electron_is_dev__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ipc_FileChannel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ipc/FileChannel */ "./main/ipc/FileChannel.ts");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -118,7 +120,7 @@ var Main = /*#__PURE__*/function () {
 
   _createClass(Main, [{
     key: "init",
-    value: function init() {
+    value: function init(channel) {
       electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('ready', this.createWindow);
       electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('window-all-closed', this.onWindowAllClosed);
       electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('activate', this.onActivate);
@@ -165,7 +167,140 @@ var Main = /*#__PURE__*/function () {
   return Main;
 }();
 
-new Main().init();
+new Main().init([new _ipc_FileChannel__WEBPACK_IMPORTED_MODULE_3__["FileChannel"]('fileprocess')]);
+
+/***/ }),
+
+/***/ "./main/ipc/FileChannel.ts":
+/*!*********************************!*\
+  !*** ./main/ipc/FileChannel.ts ***!
+  \*********************************/
+/*! exports provided: FileChannel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FileChannel", function() { return FileChannel; });
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_file__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/file */ "./main/utils/file.ts");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var FileChannel = /*#__PURE__*/function () {
+  function FileChannel(channelName) {
+    var _this = this;
+
+    _classCallCheck(this, FileChannel);
+
+    this.channelName = channelName;
+    electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on(this.channelName, function (event, command, args) {
+      switch (command) {
+        case 'save':
+        case 'delete':
+        case 'load':
+          _this[command](event, args);
+
+          break;
+
+        default:
+          console.log('There is no command in thic channel');
+          break;
+      }
+    });
+  }
+
+  _createClass(FileChannel, [{
+    key: "save",
+    value: function save(event, args) {
+      console.log(args);
+      event.reply('fuck', 'u');
+    }
+  }, {
+    key: "load",
+    value: function () {
+      var _load = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event, args) {
+        var data;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return Object(_utils_file__WEBPACK_IMPORTED_MODULE_1__["loadFile"])();
+
+              case 2:
+                data = _context.sent;
+                event.reply('loadComplete', data);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function load(_x, _x2) {
+        return _load.apply(this, arguments);
+      }
+
+      return load;
+    }()
+  }, {
+    key: "delete",
+    value: function _delete(event, args) {
+      console.log(args);
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      throw new Error("Method not implemented.");
+    }
+  }, {
+    key: "setName",
+    value: function setName(name) {
+      throw new Error("Method not implemented.");
+    }
+  }]);
+
+  return FileChannel;
+}();
+
+/***/ }),
+
+/***/ "./main/utils/file.ts":
+/*!****************************!*\
+  !*** ./main/utils/file.ts ***!
+  \****************************/
+/*! exports provided: loadFile */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadFile", function() { return loadFile; });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+
+function loadFile() {
+  return new Promise(function (resolve, reject) {
+    fs__WEBPACK_IMPORTED_MODULE_0__["readFile"]('./data/real-dev-data.json', function (err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data.toString());
+      }
+    });
+  });
+}
 
 /***/ }),
 
@@ -10398,6 +10533,17 @@ module.exports = __webpack_require__(/*! ./main/electron.ts */"./main/electron.t
 /***/ (function(module, exports) {
 
 module.exports = require("electron");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
 
 /***/ }),
 

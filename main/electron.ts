@@ -1,11 +1,12 @@
 import { app, BrowserWindow } from "electron";
 import isDev from 'electron-is-dev'
 import * as path from "path";
-
+import { IIpcChannel } from "./ipc/IIpcChannel";
+import { FileChannel } from "./ipc/FileChannel";
 class Main {
     private win: BrowserWindow
 
-    public init() {
+    public init(channel: IIpcChannel[]) {
         app.on('ready', this.createWindow)
         app.on('window-all-closed', this.onWindowAllClosed)
         app.on('activate', this.onActivate)
@@ -44,5 +45,7 @@ class Main {
     }
 }
 
-(new Main()).init()
+(new Main()).init([
+    new FileChannel('fileprocess')
+])
 

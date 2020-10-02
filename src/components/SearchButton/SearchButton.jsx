@@ -34,7 +34,7 @@ export default class SearchButton extends Component{
 
     handleSearchChange = (event) => {
         const searchResult = [];
-        if(event.target.value != ""){
+        if(event.target.value !== ""){
             for(var collection of this.props.collections) {
                 if(collection.path.split("\\").pop().toLowerCase().includes(event.target.value.toLowerCase())) {
                     searchResult.push(collection);
@@ -61,7 +61,7 @@ export default class SearchButton extends Component{
                     onChange={this.handleSearchChange} 
                     value={this.state.search_target}
                 />
-                <div id="search-result-menu" className={this.state.menu_show&&this.state.search_target != "" ? "show" : null}>
+                <div id="search-result-menu" className={this.state.menu_show&&this.state.search_target !== "" ? "show" : null}>
                     <p className="search-count">Search Results({this.state.search_result.length})</p>
                     {
                         this.state.search_result.map(note => {

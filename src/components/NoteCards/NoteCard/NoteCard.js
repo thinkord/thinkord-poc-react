@@ -28,8 +28,8 @@ function NoteCard(props) {
         setNewTitle(event.target.value);
     }
 
-    const handleBookmarkChanged = (noteId) => {
-    }
+    // const handleBookmarkChanged = (noteId) => {
+    // }
 
     const handleNoteRename = (newTitle, noteId) => {
         updateCollectionTitle(newTitle, noteId);
