@@ -1,4 +1,4 @@
-import React, { useContext,useState } from "react"
+import React, { useContext, useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import { StoreContext } from '../context'
@@ -12,7 +12,7 @@ const useStyle = makeStyles((theme) => ({
         background: 'grey'
     }
 }))
-const Work = ({match}) => {
+const Work = ({ match }) => {
     console.log(match)
     const classes = useStyle()
     const [collectionId] = useState(match.params.id)
@@ -20,7 +20,7 @@ const Work = ({match}) => {
     const { getCollection } = context
 
     const collection = getCollection(collectionId)
-    console.log(collection)
+
     return (
         <div className={classes.root}>
             <Link className="App-link" to="/">Link to Home</Link>

@@ -1,0 +1,14 @@
+{
+    "appId": "com.3071.thinkord",
+    "productName": "Thinkord",
+    "files": [
+        "build/**/*",
+        "electron.js"
+    ],
+    "win": {
+        "target": [
+            "nsis",
+            "zip"
+        ]
+    }
+}

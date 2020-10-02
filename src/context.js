@@ -28,7 +28,7 @@ class StoreProvider extends Component {
                     ]
                 }
             },
-            collectionIds: []
+            collectionIds: ['new-1']
         }
     }
 
@@ -155,7 +155,7 @@ class StoreProvider extends Component {
         const { data } = this.state
         let collections = { ...data.collections }
         let collectionIds = [...data.collectionIds]
-        
+
         Object.keys(collections).map((cId) => {
             if (cId === collectionId) {
                 delete collections[collectionId]
@@ -198,6 +198,16 @@ class StoreProvider extends Component {
             data: newState
         })
     }
+
+
+    addFolder() {
+
+    }
+
+    deleteFolder() {
+
+    }
+
     render() {
         return (
             <StoreContext.Provider value={{
@@ -218,8 +228,5 @@ class StoreProvider extends Component {
 }
 
 const StoreConsumer = StoreContext.Consumer
-
-
-
 
 export { StoreProvider, StoreConsumer, StoreContext }
