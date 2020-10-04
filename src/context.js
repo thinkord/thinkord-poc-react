@@ -54,7 +54,6 @@ class StoreProvider extends Component {
         })
     }
 
-
     getFolder = (id) => {
         console.log(this.state)
         const { data } = this.state

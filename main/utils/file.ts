@@ -1,8 +1,10 @@
 import * as fs from "fs";
-
+import * as path from "path";
+import isDev from 'electron-is-dev'
 export function loadFile(): Promise<string> {
     return new Promise((resolve, reject) => {
-        fs.readFile('./data/real-dev-data.json', function (err: NodeJS.ErrnoException, data: Buffer) {
+        let p = isDev ? `./public/real-dev-data.json` : path.join(__dirname, '../build/real-dev-data.json')
+        fs.readFile(p, function (err: NodeJS.ErrnoException, data: Buffer) {
             if (err) {
                 reject(err)
             } else {

@@ -289,10 +289,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadFile", function() { return loadFile; });
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var electron_is_dev__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! electron-is-dev */ "./node_modules/electron-is-dev/index.js");
+/* harmony import */ var electron_is_dev__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(electron_is_dev__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 function loadFile() {
   return new Promise(function (resolve, reject) {
-    fs__WEBPACK_IMPORTED_MODULE_0__["readFile"]('./data/real-dev-data.json', function (err, data) {
+    var p = electron_is_dev__WEBPACK_IMPORTED_MODULE_2___default.a ? "./public/real-dev-data.json" : path__WEBPACK_IMPORTED_MODULE_1__["join"](__dirname, '../build/real-dev-data.json');
+    fs__WEBPACK_IMPORTED_MODULE_0__["readFile"](p, function (err, data) {
       if (err) {
         reject(err);
       } else {
