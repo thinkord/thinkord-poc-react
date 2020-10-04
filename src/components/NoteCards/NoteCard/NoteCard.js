@@ -36,8 +36,8 @@ function NoteCard(props) {
         handleModalToggle();
     }
 
-    const handleNoteDelete = (noteId) => {
-        deleteCollection(noteId)
+    const handleNoteDelete = (noteId, folderId) => {
+        deleteCollection(noteId, folderId)
     }
 
     var modalDialog;
@@ -69,7 +69,8 @@ function NoteCard(props) {
                     <Modal.Body>Do you really want to delete file "{props.title}" ?</Modal.Body>
                     <Modal.Footer className="modal_footer">
                         <i className="modal_icon fas fa-check-circle" onClick={() => {
-                            handleNoteDelete(props.id);
+                            console.log(props.folder)
+                            handleNoteDelete(props.id, props.folder);
                             handleModalToggle();
                         }}></i>
                         <i className="modal_icon fas fa-times-circle" onClick={handleModalToggle}></i>
@@ -98,10 +99,6 @@ function NoteCard(props) {
                         <i className="fas fa-clock"></i>
                         <span>changed 2 hours ago</span>
                     </div>
-                    {/* <div className="note-block-tags">
-                        <i className="fas fa-tag"></i>
-                        <span>statistics</span>
-                    </div> */}
                 </div>
                 <Link className="card-record-anchor" to={`/work/${props.id}`} onClick={() => { appRuntime.send('controlbar', 'hello') }}>
                     <i className="far fa-dot-circle"></i>

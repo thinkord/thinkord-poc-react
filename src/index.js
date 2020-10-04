@@ -13,7 +13,7 @@ ReactDOM.render(
     <Router>
       <div>
         <main>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={WorkSpace} />
           <Route path="/folder/:id" component={WorkSpace} />
           <Route path="/work/:id" component={Work} />
         </main>
