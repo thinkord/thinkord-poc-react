@@ -54,9 +54,6 @@ class StoreProvider extends Component {
         })
     }
 
-
-    saveCollection = ()=>{
-        appRuntime.send('saveFile',JSON.stringify(this.state.data))
     getFolder = (id) => {
         const { data } = this.state
         return data.folders[id]
