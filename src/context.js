@@ -55,6 +55,7 @@ class StoreProvider extends Component {
     }
 
     getFolder = (id) => {
+        console.log(this.state)
         const { data } = this.state
         return data.folders[id]
     }
@@ -109,9 +110,16 @@ class StoreProvider extends Component {
      * 
      * @param {string} title 
      */
-    addCollection = (title) => {
+    addCollection = (title, folderId) => {
         const { data } = this.state
         const newCollectionId = uuid()
+        let folders = {...data.folders}
+        Object.keys(folders).map((fId) => {
+            if (fId === folderId) {
+                folders[folderId]['collections'].push(newCollectionId)
+                return folders
+            }
+        })
         const newCollection = {
             id: newCollectionId,
             title,
@@ -123,6 +131,12 @@ class StoreProvider extends Component {
             collections: {
                 ...data.collections,
                 [newCollectionId]: newCollection
+            },
+            folders: {
+                ...folders
+            },
+            folderIds: {
+                ...data.folderIds
             }
         }
 
@@ -175,12 +189,23 @@ class StoreProvider extends Component {
     }
 
 
-    deleteCollection = (collectionId) => {
+    deleteCollection = (collectionId, folderId) => {
 
         const { data } = this.state
         let collections = { ...data.collections }
         let collectionIds = [...data.collectionIds]
+        let folders = {...data.folders}
 
+        Object.keys(folders).map((fId) => {
+            if (fId === folderId) {
+                folders[folderId]['collections'].map((cId, index) => {
+                    if (cId === collectionId) {
+                        folders[folderId]['collections'].splice(index, 1)
+                    }
+                })
+                return folders
+            }
+        })
         Object.keys(collections).map((cId) => {
             if (cId === collectionId) {
                 delete collections[collectionId]
@@ -193,7 +218,7 @@ class StoreProvider extends Component {
             }
             return collectionIds
         })
-        const newState = { ...data, collections, collectionIds }
+        const newState = { ...data, collections, folders, collectionIds }
         this.setState({
             data: newState
         })

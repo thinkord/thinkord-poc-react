@@ -50,6 +50,16 @@
         }
     },
     "folders": {
+        "home": {
+            "id": "home",
+            "name": "home",
+            "collections": [
+                "collection-1",
+                "collection-2",
+                "collection-3",
+                "collection-4"
+            ]
+        },
         "folder-1": {
             "id": "folder-1",
             "name": "f-1",
@@ -74,6 +84,7 @@
         "collection-4"
     ],
     "folderIds": [
+        "home",
         "folder-1",
         "folder-2"
     ]

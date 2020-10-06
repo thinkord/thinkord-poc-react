@@ -1,17 +1,18 @@
 import React from 'react'
 import NoteCard from './NoteCard/NoteCard';
 
-const noteCards = ({data}) => (
-    <div className='note-cards' style={{padding: "40px 0"}}>
+const noteCards = ({data, folder}) => (
+    <div className='note-cards'>
         <h2>Files</h2>
         <div className='card-deck' style={{display: "flex"}}>
-            {data.collectionIds.map(collectionId => {
+            {data.map(collection => {
                 return (
                     <NoteCard
-                        key={collectionId}
-                        id={collectionId}
-                        title={data.collections[collectionId].title}
-                        // bookmark={data.collections[collectionId].bookmarked}
+                        key={collection.id}
+                        id={collection.id}
+                        folder={folder}
+                        title={collection.title}
+                        bookmark={collection.bookmarked}
                     ></NoteCard>
                 )
             })}
