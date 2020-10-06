@@ -20,7 +20,7 @@ export class FileChannel implements IIpcChannel {
         })
     }
 
-    save(event, args) {
+    save(event: IpcMainEvent, args:any) {
         console.log(args)
         event.reply('fuck', 'u')
     }
@@ -30,15 +30,15 @@ export class FileChannel implements IIpcChannel {
         event.reply('loadComplete', data)
     }
 
-    delete(event, args) {
+    delete(args:any) {
         console.log(args)
     }
 
 
-    getName(): string {
-        throw new Error("Method not implemented.");
-    }
-    setName(name: string) {
-        throw new Error("Method not implemented.");
-    }
+    // getName(): string {
+    //     throw new Error("Method not implemented.");
+    // }
+    // setName(name: string) {
+    //     throw new Error("Method not implemented.");
+    // }
 }
