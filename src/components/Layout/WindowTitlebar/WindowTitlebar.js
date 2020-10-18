@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 // import { remote } from 'electron'
-import logo from '../../logo.svg'
+import logo from '../../../logo.svg'
 import "./windowTitlebar.css"
 
 // const { remote } = window.require('electron').remote;
 // const win = remote.getCurrentWindow()
-const win = null;
+// const win = null;
 export class WindowTitlebar extends Component {
     // componentDidMount() {
     //     this.handleWindowControls();

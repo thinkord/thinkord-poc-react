@@ -12,15 +12,6 @@ function App() {
   const context = useContext(StoreContext)
   const { data } = context
   console.log(data)
-  const handleSearchClick = (search_file) => {
-    search_file = search_file.toLowerCase();
-    var new_collections = [];
-    for (var i = 0; i < this.state.collections.length; i++) {
-      if (this.state.collections[i].path.split("\\").pop().toLowerCase().includes(search_file)) {
-        new_collections.push(this.state.collections[i]);
-      }
-    }
-  }
 
   return (
     <React.Fragment>

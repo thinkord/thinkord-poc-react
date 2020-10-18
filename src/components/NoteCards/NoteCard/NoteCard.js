@@ -31,8 +31,8 @@ function NoteCard(props) {
     // const handleBookmarkChanged = (noteId) => {
     // }
 
-    const handleNoteRename = (newTitle, noteId) => {
-        updateCollectionTitle(newTitle, noteId);
+    const handleNoteRename = (title, noteId) => {
+        updateCollectionTitle(title, noteId);
         handleModalToggle();
     }
 

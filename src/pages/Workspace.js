@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
-import WindowTitlebar from '../components/WindowTitlebar/WindowTitlebar';
 import NoteCards from '../components/NoteCards/NoteCards';
 import Modal from 'react-bootstrap/Modal';
 import Folders from '../components/Folders/Folders'
@@ -8,6 +7,7 @@ import Folders from '../components/Folders/Folders'
 import { StoreContext } from '../context'
 import Container from 'react-bootstrap/Container';
 import appRuntime from '../appRuntime';
+import './Home.scss';
 
 export default function Workspace({ match }) {
     const [modalShow, setModalShow] = useState(false);
@@ -21,18 +21,18 @@ export default function Workspace({ match }) {
     const handleModalToggle = () => {
         setModalShow(prevState => !prevState);
     }
-    const handleNoteCreate = (title, folderId) => {
+    const handleNoteCreate = (title, destFolder) => {
         console.log('send')
-        addCollection(title, folderId)
+        addCollection(title, destFolder)
         appRuntime.send('createFile',title)
     }
     const handleTitleChange = (event) => {
         setNewTitle(event.target.value);
         console.log(newTitle)
     }
+    console.log(data)
     return (
         <React.Fragment>
-            <WindowTitlebar docTitle="Home" />
             <header className="home-header">
                 <h1 className="title">{folderId}</h1>
                 <div className="controls">
@@ -41,13 +41,13 @@ export default function Workspace({ match }) {
                     <img className="user" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ3f_mCLpkLWSbUPVBMkI1-ZUUFP-dqFeFGUCDOc1lzuWUQxROe&usqp=CAU" />
                 </div>
             </header>
-            <main>
-                <Container>
+            <div className="Content">
+                <Container className="container">
                     <Link to="/">Back to home</Link>
                     <Folders data={data}/>
                     <NoteCards data={collections} folder={folderId}/>
                 </Container>
-            </main>
+            </div>
             
             <Modal show={modalShow} onHide={handleModalToggle} centered>
                 <Modal.Header className="modal_header">

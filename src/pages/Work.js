@@ -10,7 +10,7 @@ const useStyle = makeStyles((theme) => ({
     root: {
         display: 'flex',
         minHeight: '100vh',
-        background: 'grey'
+        // background: 'grey'
     }
 }))
 const Work = ({ match }) => {
